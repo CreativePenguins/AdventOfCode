@@ -1,0 +1,12 @@
+/Users/tylerpearson/Code/AdventOfCode/day2/bin/Debug/netcoreapp3.1/day2.deps.json
+/Users/tylerpearson/Code/AdventOfCode/day2/bin/Debug/netcoreapp3.1/day2.runtimeconfig.json
+/Users/tylerpearson/Code/AdventOfCode/day2/bin/Debug/netcoreapp3.1/day2.runtimeconfig.dev.json
+/Users/tylerpearson/Code/AdventOfCode/day2/bin/Debug/netcoreapp3.1/day2.dll
+/Users/tylerpearson/Code/AdventOfCode/day2/bin/Debug/netcoreapp3.1/day2.pdb
+/Users/tylerpearson/Code/AdventOfCode/day2/obj/Debug/netcoreapp3.1/day2.csprojAssemblyReference.cache
+/Users/tylerpearson/Code/AdventOfCode/day2/obj/Debug/netcoreapp3.1/day2.AssemblyInfoInputs.cache
+/Users/tylerpearson/Code/AdventOfCode/day2/obj/Debug/netcoreapp3.1/day2.AssemblyInfo.cs
+/Users/tylerpearson/Code/AdventOfCode/day2/obj/Debug/netcoreapp3.1/day2.csproj.CoreCompileInputs.cache
+/Users/tylerpearson/Code/AdventOfCode/day2/obj/Debug/netcoreapp3.1/day2.dll
+/Users/tylerpearson/Code/AdventOfCode/day2/obj/Debug/netcoreapp3.1/day2.pdb
+/Users/tylerpearson/Code/AdventOfCode/day2/obj/Debug/netcoreapp3.1/day2.genruntimeconfig.cache
