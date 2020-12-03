@@ -19,12 +19,15 @@ namespace day2
                 char allowedChar = char.Parse(passwordAndPolicy[1].TrimEnd(':'));
                 string password = passwordAndPolicy[2];
 
-                int minAllowed = int.Parse(timesAllowed.Split('-')[0]);
-                int maxAllowed = int.Parse(timesAllowed.Split('-')[1]);
+                int firstPos = int.Parse(timesAllowed.Split('-')[0]) - 1;
+                int secondPos = int.Parse(timesAllowed.Split('-')[1]) - 1;
 
-                int count = password.Count(f => (f == allowedChar));
-
-                if(count >= minAllowed && count <= maxAllowed) {
+                if(
+                    (password[firstPos] == allowedChar &&
+                    password[secondPos] != allowedChar) || 
+                    (password[firstPos] != allowedChar &&
+                    password[secondPos] == allowedChar)
+                ){
                     correctPasswords++;
                 }
             }
