@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace day5
@@ -8,7 +9,7 @@ namespace day5
         static void Main(string[] args)
         {
             string[] lines = File.ReadAllLines("data.txt");
-            int maxSeatId = 0;
+            List<int> seatIds = new List<int>();
 
             foreach(string line in lines) {
                 string rowCode = line.Substring(0, 7);
@@ -43,10 +44,16 @@ namespace day5
                 }
 
                 int seatId = rowMin * 8 + columnMin;
-                maxSeatId = seatId > maxSeatId ? seatId : maxSeatId;
+                seatIds.Add(seatId);
             }
 
-            Console.WriteLine($"The max seat id is {maxSeatId}");
+            seatIds.Sort();
+
+            for(int i = 0; i + 1 < seatIds.Count; i++) {
+                if(seatIds[i + 1] - seatIds[i] != 1) {
+                    Console.WriteLine($"Your seat id is: {seatIds[i] + 1}");
+                }
+            }
         }
     }
 }
