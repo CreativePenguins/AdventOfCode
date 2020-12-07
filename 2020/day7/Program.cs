@@ -12,14 +12,9 @@ namespace day7
             Program2 helper = new Program2();
 
             List<string> rulesInput = new List<string>(File.ReadAllLines("data.txt"));
-            // Do some recursion
             Dictionary<string, List<string>> rules = new Dictionary<string, List<string>>();
-            // muted yellow, [2 shiny gold, 9 faded plum]
-            // muted yellow, [no other]
 
             Dictionary<string, bool> bagCanContain = new Dictionary<string, bool>();
-
-            int total = 0;
 
             foreach(string line in rulesInput) {
                 string[] bagInfo = line.Split("contain");
@@ -33,53 +28,33 @@ namespace day7
                 rules.Add(bagColor, allowedBags);
             }
 
-            foreach(KeyValuePair<string, List<string>> rule in rules) {
-                if(helper.CanContainColor(
-                    rule.Key,
-                    rule.Value, 
-                    "shiny gold", 
-                    rules, 
-                    bagCanContain))
-                    total++;
-            }
+            int number = helper.CountBagsContained("shiny gold", rules, 1);
 
-            Console.WriteLine($"There are {total} bag colors");
+            Console.WriteLine($"There are {number} contained bags");
         }
     }
 
     class Program2 {
-        public Boolean CanContainColor(
+        public int CountBagsContained(
             string key,
-            List<string> values, 
-            string color, 
             Dictionary<string, List<string>> rules,
-            Dictionary<string, bool> alreadyChecked) {
+            int keyCount) {
 
-            bool canContain = false;
+            int totalBags = 0;
 
-            foreach(string value in values) {
+            foreach(string value in rules[key]) {
                 string newBagColor = Regex.Replace(value, @"\d{1,}", "").Trim();
+                int newBagCount = 0;
+                int.TryParse(Regex.Match(value, @"\d{1,}").Value.Trim(), out newBagCount);
 
-                if(alreadyChecked.ContainsKey(key)) {
-                    canContain = alreadyChecked[key];
-                } else if (value.Contains(color)) {
-                    canContain = true;
-                } else if (value.Contains("no other")) {
-                    canContain = false;
+                if (value.Contains("no other")) {
+                    totalBags += 0;
                 } else {
-                    canContain = CanContainColor(newBagColor, rules[newBagColor], color, rules, alreadyChecked);
-                }
-
-                if(canContain) {
-                    if(!alreadyChecked.ContainsKey(key))
-                        alreadyChecked.Add(key, canContain);
-                    return canContain;
+                    totalBags += newBagCount + (newBagCount * CountBagsContained(newBagColor, rules, newBagCount));
                 }
             }
 
-            if(!alreadyChecked.ContainsKey(key))
-                alreadyChecked.Add(key, canContain);
-            return canContain;
+            return totalBags;
         }
     }
 }
