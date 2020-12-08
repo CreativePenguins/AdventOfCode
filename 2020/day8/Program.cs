@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.IO;
 using System.Text.RegularExpressions;
 
@@ -10,7 +11,7 @@ namespace day7
         static void Main(string[] args)
         {
             Program2 help = new Program2();
-            List<string> input = new List<string>(File.ReadAllLines("data.txt"));
+            ImmutableList<string> input = ImmutableList.Create<string>(File.ReadAllLines("data.txt"));
 
             for(int i = 0; i < input.Count; i++) {
                 var newInput = new List<string>(input);
