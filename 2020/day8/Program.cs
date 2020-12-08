@@ -9,20 +9,46 @@ namespace day7
     {
         static void Main(string[] args)
         {
+            Program2 help = new Program2();
             List<string> input = new List<string>(File.ReadAllLines("data.txt"));
-            double accumulator = 0;
 
-            List<int> completedInstructions = new List<int>();
+            for(int i = 0; i < input.Count; i++) {
+                var newInput = new List<string>(input);
+                string oldCommand = newInput[i];
+                
+                switch(oldCommand.Substring(0,3)) {
+                    case "nop":
+                        newInput[i] = oldCommand.Replace("nop", "jmp");
+                        break;
+                    case "jmp":
+                        newInput[i] = oldCommand.Replace("jmp", "nop");
+                        break;
+                    default:
+                        continue;
+                }
+                var worked = help.figureItOut(newInput);
 
+                if(worked.Item1)
+                    Console.WriteLine($"It worked! Value: {worked.Item2}");
+            }
+        }
+    }
+
+    class Program2 {
+        public Tuple<bool, double> figureItOut(List<string> input) {
+            Dictionary<int, string> completedInstructions = new Dictionary<int, string>();
             int i = 0;
+            double accumulator = 0;
+            bool working = true;
+
             while(i < input.Count) {
                 string instruction = input[i];
 
-                if(completedInstructions.Contains(i)) {
-                    Console.WriteLine($"Acc val is {accumulator}");
+                if(completedInstructions.ContainsKey(i)) {
+                    working = false;
                     break;
                 } else {
-                    completedInstructions.Add(i);
+                    completedInstructions.Add(i, instruction);
                 }
 
 
@@ -53,6 +79,7 @@ namespace day7
                         continue;
                 }
             }
+            return new Tuple<bool, double>(working, accumulator);
         }
     }
 }
